@@ -5,7 +5,18 @@
  </tileset>
  <layer name="Tile Layer 1" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt0bEJACAQBEHtv2kTE+EREfUDZ+AauC0FAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD+VfvIU4ORI2qhyVuzBvrcs/u7HuedbqHTupffaxLL/l+PUQMKbQCR
+   eJzt0TEOgzAUBUF8/0unSZUgCATkVTIjfcmVi7djWZbxPObSoUePFj1a9GjRo0WPFj1a9GjRo0WPFj1a9GjRo0WPFj1a9GjRo0WPFj1a9GjRo0WPFj1a9GjRo0WPFj1a9GjRo0WPFj1a9GjRo0WPFj1a9GjRo0WPFj1a9GjRo0WPFj1a9GjRo0WPFj1a9GjRo0WPFj1a9GjRo0WPFj1a9GjRo0WPFj1a9GjRo0WPFj1a9GjRo0WPFj1a9GjRo0WPFj1a9GjRo0WPFj1a9GjRo0WPFj1a9GjRo0WPFj1a9GjRo0WPFj1a9GjRo0WPFj1a7uoxbvz7l1252Vg5jrlqs7UWmhz3zV5bDfQ555N9zu6ux3F7+1zdQqdt4+U9+/7Z7O3d+z0A0pkBOA==
   </data>
  </layer>
+ <objectgroup name="terrys">
+  <object x="408" y="2830">
+   <ellipse/>
+  </object>
+  <object x="276" y="2844.67">
+   <ellipse/>
+  </object>
+  <object x="141.5" y="3134.83">
+   <ellipse/>
+  </object>
+ </objectgroup>
 </map>

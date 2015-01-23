@@ -22,6 +22,8 @@ public class Game extends ApplicationAdapter {
 	
 	public static Content res;
 	
+	public static float VOLUME;
+	
 	@Override
 	public void create () {
 
@@ -36,6 +38,7 @@ public class Game extends ApplicationAdapter {
 		
 		res.loadBitmapFont("font", "papyrus.TTF", "large", 56, Color.WHITE);
 		res.loadBitmapFont("font", "papyrus.TTF", "mItems", 34, Color.WHITE);
+		res.loadBitmapFont("font", "papyrus.TTF", "main", 24, Color.WHITE);
 		
 		Gdx.input.setInputProcessor(new MyInputProcessor());
 		Controllers.addListener(new MyControllerProcessor());

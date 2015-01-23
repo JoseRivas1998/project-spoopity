@@ -1,6 +1,5 @@
 package com.sshsgd.spoopity.entities;
 
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.EllipseMapObject;
@@ -13,12 +12,14 @@ import com.badlogic.gdx.math.Ellipse;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.sshsgd.spoopity.MyCamera;
 
 public class World {
 
 
 	private Array<Rectangle> bounds;
 	private Array<Vector2> objects;
+	private Array<EnemyRectangle> enemies;
 	
 	private TiledMap tileMap;
 	private OrthogonalTiledMapRenderer tmr;
@@ -30,6 +31,8 @@ public class World {
 	public World() {
 		bounds = new Array<Rectangle>();
 		objects = new Array<Vector2>();
+		enemies = new Array<EnemyRectangle>();
+		
 		
 		createTiles();
 	}
@@ -42,9 +45,12 @@ public class World {
 		TiledMapTileLayer ground;
 		MapLayer object;
 		
-		ground = (TiledMapTileLayer) tileMap.getLayers().get("ground");
+		ground = (TiledMapTileLayer) tileMap.getLayers().get("Tile Layer 1");
+		object = tileMap.getLayers().get("terrys");
 		
 		createLayer(ground, bounds);
+		createObjectLayer(object, objects);
+		createEnemyRectangle(object, enemies);
 		
 		width = ground.getWidth() * tileSize;
 		height = ground.getHeight() * tileSize;
@@ -82,7 +88,18 @@ public class World {
 		
 	}
 	
-	public void render(OrthographicCamera cam) {
+	public void createEnemyRectangle(MapLayer layer, Array<EnemyRectangle> enemies ) {
+		
+		for(MapObject mo : layer.getObjects()) {
+				Ellipse e = ((EllipseMapObject) mo).getEllipse();
+				float x = e.x;
+				float y = e.y;
+				
+				enemies.add(new EnemyRectangle(x, y, 32, 32, 0));
+		}
+	}
+	
+	public void render(MyCamera cam) {
 		tmr.setView(cam);
 		tmr.render();
 	}
@@ -133,6 +150,14 @@ public class World {
 
 	public void setTileHeight(float tileHeight) {
 		this.tileHeight = tileHeight;
+	}
+
+	public Array<EnemyRectangle> getEnemies() {
+		return enemies;
+	}
+
+	public void setEnemies(Array<EnemyRectangle> enemies) {
+		this.enemies = enemies;
 	}
 	
 }
