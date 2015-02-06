@@ -19,4 +19,40 @@
    <ellipse/>
   </object>
  </objectgroup>
+ <objectgroup name="rectangles">
+  <object x="384.836" y="3146.18">
+   <ellipse/>
+  </object>
+  <object x="462.378" y="3097.36">
+   <ellipse/>
+  </object>
+  <object x="506.893" y="3127.51">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="spirits">
+  <object x="409.248" y="2976.74">
+   <ellipse/>
+  </object>
+  <object x="488.225" y="2811.6">
+   <ellipse/>
+  </object>
+  <object x="255.6" y="2663.7">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="demons">
+  <object x="693.567" y="2823.09">
+   <ellipse/>
+  </object>
+  <object x="838.599" y="3015.51">
+   <ellipse/>
+  </object>
+  <object x="479.609" y="2932.22">
+   <ellipse/>
+  </object>
+  <object x="512.636" y="3061.46">
+   <ellipse/>
+  </object>
+ </objectgroup>
 </map>

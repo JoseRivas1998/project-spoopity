@@ -24,6 +24,8 @@ public class PlayState extends GameState {
 	
 	private HUD hud;
 	
+	private EnemyRectangle er;
+	
 	public PlayState(GameStateManager gsm) {
 		super(gsm);
 	}
@@ -41,6 +43,8 @@ public class PlayState extends GameState {
 		for(Vector2 v: w.getObjects()) {
 			basics.add(new Basic("basics/temp/walkr.png", 4, v.x, v.y, .1f));
 		}
+		
+		er = new EnemyRectangle(32 * 14, 64, 32, 32, EnemyRectangle.LEFT_RIGHT);
 		
 		cam = new MyCamera(Game.SIZE, true);
 	}
@@ -82,8 +86,20 @@ public class PlayState extends GameState {
 			cam.position.y = w.getHeight() - Game.CENTER.y;
 		}
 		cam.update();
-		for(Basic b : basics) {
-			b.upadate(w);
+		if(!paused) {
+			er.update();
+			for(Basic b : basics) {
+				b.upadate(w);
+			}
+			for(EnemyRectangle e : w.getRectangles()) {
+				e.update();
+			}
+			for(EnemyDemon d : w.getDemons()) {
+				d.update(dt, er);
+			}
+			for(EnemySpirit s : w.getSpirits()) {
+				s.update();
+			}
 		}
 	}
 
@@ -101,8 +117,17 @@ public class PlayState extends GameState {
 		sr.begin(ShapeType.Filled);
 		sr.setProjectionMatrix(cam.combined);
 		sr.setColor(Color.GREEN);
-		for(EnemyRectangle e : w.getEnemies()) {
+		for(EnemyRectangle e : w.getRectangles()) {
 			e.draw(sr, sb, dt);
+		}
+		er.draw(sr, sb, dt);
+		sr.setColor(Color.YELLOW); 
+		for(EnemySpirit s : w.getSpirits()) {
+			s.draw(sr, sb, dt);
+		}
+		sr.setColor(Color.RED);
+		for(EnemyDemon d : w.getDemons()) {
+			d.draw(sr, sb, dt);
 		}
 		sr.end();
 		

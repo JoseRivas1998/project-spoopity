@@ -19,7 +19,9 @@ public class World {
 
 	private Array<Rectangle> bounds;
 	private Array<Vector2> objects;
-	private Array<EnemyRectangle> enemies;
+	private Array<EnemySpirit> spirits;
+	private Array<EnemyRectangle> rectangles;
+	private Array<EnemyDemon> demons;
 	
 	private TiledMap tileMap;
 	private OrthogonalTiledMapRenderer tmr;
@@ -31,8 +33,9 @@ public class World {
 	public World() {
 		bounds = new Array<Rectangle>();
 		objects = new Array<Vector2>();
-		enemies = new Array<EnemyRectangle>();
-		
+		spirits = new Array<EnemySpirit>();
+		rectangles = new Array<EnemyRectangle>();
+		demons = new Array<EnemyDemon>();
 		
 		createTiles();
 	}
@@ -49,8 +52,17 @@ public class World {
 		object = tileMap.getLayers().get("terrys");
 		
 		createLayer(ground, bounds);
+		
 		createObjectLayer(object, objects);
-		createEnemyRectangle(object, enemies);
+
+		object = tileMap.getLayers().get("spirits");
+		createEnemySpirits(object, spirits);
+		
+		object = tileMap.getLayers().get("rectangles");
+		createEnemyRectangle(object, rectangles);
+		
+		object = tileMap.getLayers().get("demons");
+		createEnemyDemon(object, demons);
 		
 		width = ground.getWidth() * tileSize;
 		height = ground.getHeight() * tileSize;
@@ -88,6 +100,17 @@ public class World {
 		
 	}
 	
+	public void createEnemySpirits(MapLayer layer, Array<EnemySpirit> enemies ) {
+		
+		for(MapObject mo : layer.getObjects()) {
+				Ellipse e = ((EllipseMapObject) mo).getEllipse();
+				float x = e.x;
+				float y = e.y;
+				
+				enemies.add(new EnemySpirit(x, y, 32, 32, EnemyRectangle.LEFT_RIGHT));
+		}
+	}
+	
 	public void createEnemyRectangle(MapLayer layer, Array<EnemyRectangle> enemies ) {
 		
 		for(MapObject mo : layer.getObjects()) {
@@ -95,7 +118,18 @@ public class World {
 				float x = e.x;
 				float y = e.y;
 				
-				enemies.add(new EnemyRectangle(x, y, 32, 32, 0));
+				enemies.add(new EnemyRectangle(x, y, 32, 32, EnemyRectangle.LEFT_RIGHT));
+		}
+	}
+	
+	public void createEnemyDemon(MapLayer layer, Array<EnemyDemon> enemies) {
+		
+		for(MapObject mo : layer.getObjects()) {
+				Ellipse e = ((EllipseMapObject) mo).getEllipse();
+				float x = e.x;
+				float y = e.y;
+				
+				enemies.add(new EnemyDemon(x, y, 32, 32, EnemyRectangle.LEFT_RIGHT));
 		}
 	}
 	
@@ -152,12 +186,28 @@ public class World {
 		this.tileHeight = tileHeight;
 	}
 
-	public Array<EnemyRectangle> getEnemies() {
-		return enemies;
+	public Array<EnemySpirit> getSpirits() {
+		return spirits;
 	}
 
-	public void setEnemies(Array<EnemyRectangle> enemies) {
-		this.enemies = enemies;
+	public void setSpirits(Array<EnemySpirit> spirits) {
+		this.spirits = spirits;
+	}
+
+	public Array<EnemyRectangle> getRectangles() {
+		return rectangles;
+	}
+
+	public void setRectangles(Array<EnemyRectangle> rectangles) {
+		this.rectangles = rectangles;
+	}
+
+	public Array<EnemyDemon> getDemons() {
+		return demons;
+	}
+
+	public void setDemons(Array<EnemyDemon> demons) {
+		this.demons = demons;
 	}
 	
 }

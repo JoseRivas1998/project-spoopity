@@ -9,27 +9,27 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.sshsgd.spoopity.Game;
 
-public class EnemyRectangle extends Entity {
+public class EnemySpirit extends Entity {
 
 	private float speed, radians;
 	private Vector2 vel;
 	private Vector2 spawn;
 	
-	public static final int LEFT_RIGHT = 0;
-	public static final int MAX_HEALTH = 100;
+	private static final int UP_DOWN = 0;
+	private static final int MAX_HEALTH = 100;
 	
 	private int health;
 	private int moveMode;
+	private int fall;
 	
 	
-	
-	public EnemyRectangle(Vector2 position, float width, float height, int moveMode) {
+	public EnemySpirit(Vector2 position, float width, float height, int moveMode) {
 		bounds = new Rectangle(position.x, position.y, width, height);
 		spawn = new Vector2(position);
 		this.moveMode = moveMode;
 		init();
 	}
-	public EnemyRectangle(float x, float y, float width, float height, int moveMode) {
+	public EnemySpirit(float x, float y, float width, float height, int moveMode) {
 		bounds = new Rectangle(x, y, width, height);
 		spawn = new Vector2(x, y);
 		this.moveMode = moveMode;
@@ -54,9 +54,9 @@ public class EnemyRectangle extends Entity {
 	}
 	
 	public void update() {
-		if(moveMode == LEFT_RIGHT) {
+		if(moveMode == UP_DOWN) {
+				fly();
 				moveLeftRight();
-				
 		}
 	
 		bounds.x += vel.x;
@@ -65,26 +65,30 @@ public class EnemyRectangle extends Entity {
 	}
 //to do list:
 //	Make bounds
-//	When enemy reaches bounds, multiply vel by -1
+//	When enemy reaches bounds, multiply by -1
 	private void moveLeftRight() {
-		if(getX() >= spawn.x + 20) {
+		if(getX() >= spawn.x + 75 || getX() <= spawn.x - 75) {
 			vel.x *= -1;
-			if(vel.x > 0) {
-				vel.x++;
-			} else {
-				vel.x--;
-			}
-		}
-		if(getX() <= spawn.x - 20) {
-			vel.x *= -1;
-			if(vel.x > 0) {
-				vel.x--;
-			} else {
-				vel.x++;
-			}
+		} 
+	
+	}
+	
+
+	
+	private void fly() {
+		
+		if(getY() >= spawn.y + 50) {
+			vel.y--;
+		
+		} else if (getY() >= spawn.y - 45 && getX() <= spawn.x) {
+			vel.y++;
+			
+		} else if (getY() 
+				>= spawn.y - 75 && getX() >= spawn.x) {
+			vel.y++;
 			
 		}
-	
+		
 	}
 	
 	private void maxHealth() {
